@@ -1,0 +1,8 @@
+name: Reports
+version: '${version}'
+main: fr.silenthill99.reports.Main
+api-version: '1.16'
+commands:
+  report:
+  inter:
+    permission: reports.inter
