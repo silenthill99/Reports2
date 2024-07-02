@@ -1,6 +1,8 @@
 package fr.silenthill99.reports.command;
 
 import fr.silenthill99.reports.Main;
+import fr.silenthill99.reports.inventory.InventoryManager;
+import fr.silenthill99.reports.inventory.InventoryType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,16 +27,16 @@ public class InterCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "/inter <numéro> [close]");
             return false;
         }
-        int id = Integer.parseInt(args[0]);
 
         Bukkit.getScheduler().runTaskAsynchronously(main, () -> {
+            int id = Integer.parseInt(args[0]);
+            Player plaignant = main.getReportManager().getPlaignant(id);
+            Player accuse = main.getReportManager().getAccuse(id);
             if (!main.getReportManager().isExist(id)) {
                 player.sendMessage(ChatColor.RED + "L'interadmin n°" + id + " n'existe pas.");
                 return;
             }
             if(args.length == 2 && args[1].equalsIgnoreCase("close")) {
-                Player plaignant = main.getReportManager().getPlaignant(id);
-                Player accuse = main.getReportManager().getAccuse(id);
                 main.getReportManager().removeValue(player);
                 Bukkit.getScheduler().runTask(main, () -> {
                     plaignant.teleport(main.getLocManager().getTeleport(plaignant));
@@ -44,11 +46,13 @@ public class InterCommand implements CommandExecutor {
                         main.getLocManager().removeValue(accuse);
                     });
                 });
+                return;
             } else if (args.length == 2) {
-                player.sendMessage(ChatColor.RED + args[1] + " n'est pas un argument valable !");
+                player.sendMessage(ChatColor.RED + "\""+ args[1] + "\" n'est pas un argument valable !");
                 return;
             }
-            main.getReportManager().openInter(player, id, args);
+            Bukkit.getScheduler().runTask(main, () -> InventoryManager.openInventory(player, InventoryType.INTER, id,
+                    plaignant, accuse));
         });
         return true;
     }
