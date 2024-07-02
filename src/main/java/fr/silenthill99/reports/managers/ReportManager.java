@@ -1,11 +1,8 @@
 package fr.silenthill99.reports.managers;
 
 import fr.silenthill99.reports.Main;
-import fr.silenthill99.reports.inventory.InventoryManager;
-import fr.silenthill99.reports.inventory.InventoryType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
@@ -60,30 +57,6 @@ public class ReportManager {
                         players.sendMessage(ChatColor.GOLD + "Staff : " + modo.getName());
                         players.sendMessage(ChatColor.GOLD + "---------------------------------------------");
                     }
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void openInter(Player player, int id, String[] args) {
-        try {
-            PreparedStatement sts = conn.prepareStatement("SELECT * FROM reports WHERE inter_id = ?");
-            sts.setInt(1, id);
-            ResultSet rs = sts.executeQuery();
-            if (rs.next()) {
-                OfflinePlayer plaignant = getPlaignant(id);
-                OfflinePlayer accuse = getAccuse(id);
-                if (args.length == 1) {
-                    Bukkit.getScheduler().runTask(main, () -> {
-                        try {
-                            InventoryManager.openInventory(player, InventoryType.INTER, rs.getInt("inter_id"),
-                                    plaignant, accuse);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
                 }
             }
         } catch (SQLException e) {
