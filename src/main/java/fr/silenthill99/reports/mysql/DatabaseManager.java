@@ -1,4 +1,4 @@
-package fr.silenthill99.reports.mysq;
+package fr.silenthill99.reports.mysql;
 
 import java.sql.SQLException;
 

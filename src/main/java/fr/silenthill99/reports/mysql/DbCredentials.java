@@ -1,4 +1,4 @@
-package fr.silenthill99.reports.mysq;
+package fr.silenthill99.reports.mysql;
 
 public class DbCredentials {
     private final String host;

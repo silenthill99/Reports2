@@ -5,7 +5,7 @@ import fr.silenthill99.reports.command.ReportCommand;
 import fr.silenthill99.reports.inventory.InventoryManager;
 import fr.silenthill99.reports.managers.LocationManager;
 import fr.silenthill99.reports.managers.ReportManager;
-import fr.silenthill99.reports.mysq.DatabaseManager;
+import fr.silenthill99.reports.mysql.DatabaseManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
