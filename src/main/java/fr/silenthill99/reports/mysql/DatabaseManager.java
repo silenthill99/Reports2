@@ -6,7 +6,7 @@ public class DatabaseManager {
     private final DbConnection dbConnection;
 
     public DatabaseManager() {
-        this.dbConnection = new DbConnection(new DbCredentials("minecraft118.omgserv.com",
+        this.dbConnection = new DbConnection(new DbCredentials("minecraft3080.omgserv.com",
                 "minecraft_235640", "Mylene.10", "minecraft_235640", 3306));
     }
 

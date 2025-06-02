@@ -52,7 +52,8 @@ public class InterCommand implements CommandExecutor {
                 return;
             }
             Bukkit.getScheduler().runTask(main, () -> InventoryManager.openInventory(player, InventoryType.INTER, id,
-                    plaignant, accuse));
+                    plaignant, accuse)
+            );
         });
         return true;
     }
